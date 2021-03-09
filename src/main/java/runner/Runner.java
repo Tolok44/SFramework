@@ -5,6 +5,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
 import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -13,6 +14,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 
 import excelManager.GetTCData;
+import readObject.ReadObject;
 import testCase.Step;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class Runner {
     WebDriver driver;
     List<Step> steps;
     String url;
+    Properties po;
 
     @BeforeClass
     public void testSetup() {
@@ -33,10 +36,12 @@ public class Runner {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         GetTCData tcSteps = new GetTCData();
+        ReadObject prop = new ReadObject();
 
         url = "http://amazon.com.mx";
 
         try {
+            po = prop.getProperties();
             steps = tcSteps.getStepArray();
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,13 +57,13 @@ public class Runner {
             steps.get(i);
             switch(steps.get(i).getKeyword()){
                 case "GOTO":
-                    fw.navigate(url);
+                    fw.navigate(po.getProperty("url"));
                     break;
                 case "TYPETEXT":
-                    fw.write(steps.get(i).getLocatorType(), steps.get(i).getLocatorValue(), steps.get(i).getValue());
+                    fw.write(steps.get(i).getLocatorType(), po.getProperty(steps.get(i).getLocatorValue()), steps.get(i).getValue());
                     break;
                 case "CLICK":
-                    fw.click(steps.get(i).getLocatorType(), steps.get(i).getLocatorValue());
+                    fw.click(steps.get(i).getLocatorType(), po.getProperty(steps.get(i).getLocatorValue()));
 
             }
         }

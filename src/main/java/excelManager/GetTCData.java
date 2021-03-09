@@ -18,7 +18,7 @@ public class GetTCData {
 	public static List<Step> getStepArray() throws IOException {
 		List<Step> steps = new ArrayList<>();
 		ReadExcelFile excel = new ReadExcelFile();
-		Sheet sheet = excel.readExcel("E:\\hexaware\\framework", "plantilla.xlsx", "TC02");
+		Sheet sheet = excel.readExcel("C:\\Users\\Training\\Documents", "plantilla.xlsx", "TC02");
 		Iterator<Row> rowIterator = sheet.iterator();
 		Row row = rowIterator.next();
 		while(rowIterator.hasNext()) {
