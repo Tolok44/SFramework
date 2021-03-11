@@ -1,22 +1,9 @@
 package runner;
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
 
-import excelManager.GetTCData;
-import testCase.Step;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class SMethods {
@@ -25,6 +12,7 @@ public class SMethods {
 
     public SMethods(WebDriver driver) {
         this.driver = driver;
+
     }
 
     public void navigate(String url){
@@ -32,64 +20,38 @@ public class SMethods {
     }
 
     public void click(String selector, String value){
-        switch(selector){
-            case "id":
-                driver.findElement(By.id(value)).click();
-                break;
-            case "name":
-                driver.findElement(By.name(value)).click();
-                break;
-            case "tagName":
-                driver.findElement(By.tagName(value)).click();
-                break;
-            case "cssSelector":
-                driver.findElement(By.cssSelector(value)).click();
-                break;
-            case "xpath":
-                driver.findElement(By.xpath(value)).click();
-                break;
-        }
+        this.typeOfAction(selector, value).click();
     }
 
     public void write(String selector, String LocatorValue, String text){
-        switch(selector){
+        this.typeOfAction(selector, LocatorValue).sendKeys(text);
+    }
+
+    public WebElement typeOfAction(String type, String value){
+        WebElement a;
+
+        switch(type){
             case "id":
-                driver.findElement(By.id(LocatorValue)).sendKeys(text);
-                break;
+                a = driver.findElement(By.id(value));
+            break;
             case "name":
-                driver.findElement(By.name(LocatorValue)).sendKeys(text);
+                a = driver.findElement(By.name(value));
                 break;
             case "tagName":
-                driver.findElement(By.tagName(LocatorValue)).sendKeys(text);
+                a = driver.findElement(By.tagName(value));
                 break;
             case "cssSelector":
-                driver.findElement(By.cssSelector(LocatorValue)).sendKeys(text);
+                a = driver.findElement(By.cssSelector(value));
                 break;
             case "xpath":
-                driver.findElement(By.xpath(LocatorValue)).sendKeys(text);
+                a = driver.findElement(By.xpath(value));
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + type);
         }
+        return a;
     }
 }
 
 
 
-/*
-switch(selector){
-            case "id":
-                driver.findElement(By.id(value));
-                break;
-            case "name":
-                driver.findElement(By.name(value));
-                break;
-            case "tagName":
-                driver.findElement(By.tagName(value));
-                break;
-            case "cssSelector":
-                driver.findElement(By.cssSelector(value));
-                break;
-            case "xpath":
-                driver.findElement(By.xpath(value));
-                break;
-        }
- */

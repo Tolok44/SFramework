@@ -1,7 +1,5 @@
 package runner;
 import org.testng.annotations.Test;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
 import java.io.IOException;
@@ -11,13 +9,11 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
 
 import excelManager.GetTCData;
 import readObject.ReadObject;
 import testCase.Step;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -50,7 +46,7 @@ public class Runner {
 
     }
     @Test
-    public void hola(){
+    public void test(){
         SMethods fw = new SMethods(driver);
 
         for(int i=0; i<steps.size(); i++){
