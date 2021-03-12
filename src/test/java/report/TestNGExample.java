@@ -22,7 +22,7 @@ public class TestNGExample extends BaseTestNG {
 	
 	@Test
 	public void myPassingExampleTest() {
-		driver.navigate().to("www.google.com");
+		driver.navigate().to("https://www.google.com");
 		int result = 1 + 1;
 		Assert.assertEquals(result, 2);
 	}
@@ -30,7 +30,7 @@ public class TestNGExample extends BaseTestNG {
 	@Test
 	public void myFailExampleTest() {
 		// screenshot of failing tests will be saved by the base class
-		driver.navigate().to("www.google.com");
+		driver.navigate().to("https://www.google.com");
 		int result = 1 + 1;
 		Assert.assertEquals(result, 3);
 	}
