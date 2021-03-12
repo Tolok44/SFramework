@@ -18,6 +18,8 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+//Esta clase es la que se va a modificar
+
 public class BaseTestNG {
 	
 		public String rptFilename = System.getProperty("user.dir") + "\\target\\ExtentReportResultsSelenium.html";
