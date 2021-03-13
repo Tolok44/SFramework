@@ -6,6 +6,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
+
 // create your test extending BaseTestNG to leverage reporting capabilities
 public class TestNGExample extends BaseTestNG {
 
@@ -15,11 +16,10 @@ public class TestNGExample extends BaseTestNG {
 		// Set the driver if this is a selenium test
 		driver = new ChromeDriver();
 		// you can customize the report name if omitted default will be used
-		rptFilename = System.getProperty("user.dir") + "\\target\\ExtentReportResultsSelenium.html";
+		rptFilename = System.getProperty("user.dir") + "\\Reports\\Extent Report Results_"+ getCurrentDateTime() +".html";
 	}
 
 	// 2 example Tests
-	
 	@Test
 	public void myPassingExampleTest() {
 		driver.navigate().to("https://www.google.com");
