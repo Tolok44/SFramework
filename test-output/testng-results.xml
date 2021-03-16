@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2021-03-16T16:11:10 CST" name="Default suite" finished-at="2021-03-16T16:11:18 CST" duration-ms="7915">
+    <groups>
+    </groups>
+    <test started-at="2021-03-16T16:11:10 CST" name="Default test" finished-at="2021-03-16T16:11:18 CST" duration-ms="7915">
+      <class name="test.Extent">
+        <test-method is-config="true" signature="setClass()[pri:0, instance:test.Extent@3aefe5e5]" started-at="2021-03-16T16:11:10 CST" name="setClass" finished-at="2021-03-16T16:11:12 CST" duration-ms="2494" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setClass -->
+        <test-method signature="testCase(testCase.StepSelenium)[pri:0, instance:test.Extent@3aefe5e5]" started-at="2021-03-16T16:11:13 CST" name="testCase" data-provider="pasos" finished-at="2021-03-16T16:11:15 CST" duration-ms="1998" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[testCase.StepSelenium@60baef24]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCase -->
+        <test-method signature="testCase(testCase.StepSelenium)[pri:0, instance:test.Extent@3aefe5e5]" started-at="2021-03-16T16:11:15 CST" name="testCase" data-provider="pasos" finished-at="2021-03-16T16:11:15 CST" duration-ms="8" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[testCase.StepSelenium@6a84bc2a]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCase -->
+        <test-method signature="testCase(testCase.StepSelenium)[pri:0, instance:test.Extent@3aefe5e5]" started-at="2021-03-16T16:11:15 CST" name="testCase" data-provider="pasos" finished-at="2021-03-16T16:11:18 CST" duration-ms="2417" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[testCase.StepSelenium@1eea9d2d]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCase -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:test.Extent@3aefe5e5]" started-at="2021-03-16T16:11:18 CST" name="tearDown" finished-at="2021-03-16T16:11:18 CST" duration-ms="658" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- test.Extent -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
