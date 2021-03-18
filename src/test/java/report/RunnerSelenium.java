@@ -5,12 +5,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import excelManager.GetTCData;
 import readObject.ReadObject;
 import runner.SMethods;
-import testCase.Step;
+import testCase.StepSelenium;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,13 +23,13 @@ public class RunnerSelenium extends BaseTestNG {
 
 
     WebDriver driver;
-    List<Step> steps;
+    List<StepSelenium> steps;
     String url;
     Properties po;
 
     @BeforeSuite
     public void beforeSuite() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Training\\IdeaProjects\\selenium\\drivers\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", ".\\Driver\\chromedriver.exe");
         // Set the driver if this is a selenium test
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -43,7 +44,7 @@ public class RunnerSelenium extends BaseTestNG {
         //Save test case steps on a list
         try {
             po = prop.getProperties();
-            steps = tcSteps.getStepArray();
+            steps = tcSteps.getStepSelenium();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,28 +53,32 @@ public class RunnerSelenium extends BaseTestNG {
 
     }
 
-    // Test case step execution loop
-
-    @Test
-    public void runner(){
-        SMethods fw = new SMethods(driver);
-
-        for(int i=0; i<steps.size(); i++){
-            steps.get(i);
-            switch(steps.get(i).getKeyword()){
-                case "GOTO":
-                    fw.navigate(po.getProperty("url"));
-                    break;
-                case "TYPETEXT":
-                    fw.write(steps.get(i).getLocatorType(), po.getProperty(steps.get(i).getLocatorValue()), steps.get(i).getValue());
-                    break;
-                case "CLICK":
-                    fw.click(steps.get(i).getLocatorType(), po.getProperty(steps.get(i).getLocatorValue()));
-                    break;
-            }
+    @DataProvider(name="pasos")
+    Object[][] getData() throws IOException{
+        List<StepSelenium> steps = GetTCData.getStepSelenium();
+        Object[][] datos = new Object[steps.size()][1];
+        for(int row=0;row<steps.size();row++) {
+            datos[row][0]=steps.get(row);
         }
+        return datos;
     }
 
+
+    //test de data provider
+    @Test(dataProvider="pasos")
+    public void testCase(StepSelenium step) throws IOException{
+        ReadObject object = new ReadObject();
+        Properties allObjects = object.getProperties();
+        SMethods fw = new SMethods(driver);
+        try {
+            fw.realizar(allObjects, step.getKeyword(), step.getLocatorType(), step.getLocatorValue(), step.getValue(), step.getStepDescription());
+            Assert.assertTrue(true);
+        }
+        catch(Exception e) {
+            Assert.assertTrue(false);
+        }
+
+    }
 
 
     // tear down driver
