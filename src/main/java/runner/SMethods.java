@@ -1,9 +1,12 @@
 package runner;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Properties;
 
@@ -142,6 +145,9 @@ public class SMethods {
             case "date":
                 calendar(p, LocatorType, LocatorValue, value);
                 return "";
+            case "alertok":
+                alertOk();
+                return "";
             default:
                 throw new Exception("Keyword erronea");
         }
@@ -204,6 +210,13 @@ public class SMethods {
 
 
 
+    }
+
+    public void alertOk (){
+        WebDriverWait wait30 = new WebDriverWait(driver, 30);
+        wait30.until(ExpectedConditions.alertIsPresent());
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
     }
 
 
