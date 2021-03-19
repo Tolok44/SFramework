@@ -36,7 +36,6 @@ public class SMethods {
     }
 
     public boolean elementExists(String type, String lcoatorValue){
-        WebElement a;
 
         switch(type){
             case "id":
@@ -54,7 +53,7 @@ public class SMethods {
                     return true;
                 }
                 break;
-            case "cssSelector":
+            case "css":
                 if(driver.findElement(By.cssSelector(lcoatorValue))!=null){
                     return true;
                 }
@@ -140,6 +139,9 @@ public class SMethods {
                 }else{
                     throw new Exception("El texto a comparar no es igual");
                 }
+            case "date":
+                calendar(p, LocatorType, LocatorValue, value);
+                return "";
             default:
                 throw new Exception("Keyword erronea");
         }
@@ -169,7 +171,7 @@ public class SMethods {
 
     public void selectAction(Properties p, String LocatorType, String LocatorValue, String value) throws Exception {
         Select item = new Select(driver.findElement(getLocator(p, LocatorType,LocatorValue)));
-        item.selectByVisibleText(value);
+        item.selectByValue(value);
     }
 
     public boolean compareText(WebElement e, String value) {
@@ -178,9 +180,33 @@ public class SMethods {
         }else{
             return false;
         }
+    }
+
+    public void calendar(Properties p, String LocatorType, String LocatorValue, String value) throws Exception {
+
+        String monthLocator = "";
+        String splitter[] = value.split("\\s+");
+        String day = splitter[0];
+        String month = splitter[1];
+        String year = splitter[2];
+        boolean yet = false;
+        String subMonth = month.substring(0,3);
+        String splitter2[] = LocatorValue.split("\\+");
+        String dateLocation = splitter2[0] + value + splitter2[2];
+
+        String pickYear = splitter2[0] + year + splitter2[2];
+        String pickMonth = splitter2[0] + month + " " + year + splitter2[2];
+
+        driver.findElement(getLocator(p, LocatorType, "Dic_btnChooseDateProject")).click();
+        driver.findElement(By.xpath(pickYear)).click();
+        driver.findElement(By.xpath(pickMonth)).click();
+        driver.findElement(By.xpath(dateLocation)).click();
+
+
 
     }
-}
 
+
+}
 
 
