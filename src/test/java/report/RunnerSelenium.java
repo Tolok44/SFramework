@@ -1,12 +1,13 @@
 package report;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import excelManager.GetTCData;
 import readObject.ReadObject;
@@ -18,36 +19,33 @@ import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-// create your test extending BaseTestNG to leverage reporting capabilities
-public class RunnerSelenium extends BaseTestNG {
+
+public class RunnerSelenium {
 
 
     WebDriver driver;
-    List<StepSelenium> steps;
-    String url;
-    Properties po;
+    ExtentHtmlReporter htmlReporter;
+    ExtentReports extent;
+    ExtentTest test;
 
-    @BeforeSuite
-    public void beforeSuite() {
+    @BeforeClass
+    public void setClass() {
+        htmlReporter = new ExtentHtmlReporter("extent.html");
+        extent = new ExtentReports();
+        extent.attachReporter(htmlReporter);
+
         System.setProperty("webdriver.chrome.driver", ".\\Driver\\chromedriver.exe");
         // Set the driver if this is a selenium test
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        //Obtain test case steps from excel file
-        GetTCData tcSteps = new GetTCData();
-        ReadObject prop = new ReadObject();
+
+
         // you can customize the report name if omitted default will be used
-        rptFilename = System.getProperty("user.dir") + "\\target\\ExtentReportResultsSelenium.html";
+        test = extent.createTest("MyFirstTest", "Sample description");
 
 
-        //Save test case steps on a list
-        try {
-            po = prop.getProperties();
-            steps = tcSteps.getStepSelenium();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
 
 
@@ -72,19 +70,19 @@ public class RunnerSelenium extends BaseTestNG {
         SMethods fw = new SMethods(driver);
         try {
             fw.realizar(allObjects, step.getKeyword(), step.getLocatorType(), step.getLocatorValue(), step.getValue(), step.getStepDescription());
-            Assert.assertTrue(true);
+            test.pass(step.getStepDescription());
         }
         catch(Exception e) {
-            Assert.assertTrue(false);
+            test.fail(step.getStepDescription());
+            test.error(e);
         }
 
     }
 
 
-    // tear down driver
     @AfterSuite
-    public void afterSuite() {
-        System.out.println("Tests finished");
+    public void tearDown() {
+        extent.flush();
         driver.quit();
     }
 }
