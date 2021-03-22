@@ -8,8 +8,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.util.Properties;
+
 
 
 public class SMethods {
@@ -153,7 +155,11 @@ public class SMethods {
             case "alertok":
                 alertOk();
                 return "";
-
+            case "asserttextequals":
+            	System.out.println(description);
+            	String text = driver.findElement(getLocator(p, LocatorType, LocatorValue)).getText();
+            	Assert.assertEquals(text, value);
+            	return "";
             default:
                 throw new Exception("Keyword erronea");
         }

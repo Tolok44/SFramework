@@ -72,12 +72,11 @@ public class RunnerSelenium {
             fw.realizar(allObjects, step.getKeyword(), step.getLocatorType(), step.getLocatorValue(), step.getValue(), step.getStepDescription());
             test.pass(step.getStepDescription());
         }
-        catch(Exception e) {
+        catch(Exception | AssertionError e) {
             test.fail(step.getStepDescription());
-            test.error(e);
+            test.error(e.getMessage());
         }
-
-    }
+     }
 
 
     @AfterSuite
