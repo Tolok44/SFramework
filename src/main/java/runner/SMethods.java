@@ -155,6 +155,7 @@ public class SMethods {
             case "alertok":
                 alertOk();
                 return "";
+            case "verify_text":
             case "asserttextequals":
             	System.out.println(description);
             	String text = driver.findElement(getLocator(p, LocatorType, LocatorValue)).getText();
