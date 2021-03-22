@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -38,6 +39,10 @@ public class SMethods {
 
     public void refresh(){
         driver.navigate().refresh();
+    }
+
+    public void click(By by){
+        new WebDriverWait(driver, 15).until(ExpectedConditions.elementToBeClickable(by)).click();
     }
 
     public boolean elementExists(String type, String lcoatorValue){
@@ -116,7 +121,7 @@ public class SMethods {
                 return "";
             case "click":
                 System.out.println(description);
-                driver.findElement(getLocator(p, LocatorType, LocatorValue)).click();
+                click(getLocator(p,LocatorType, LocatorValue));
                 return "";
             case "type":
                 System.out.println(description);
@@ -225,6 +230,7 @@ public class SMethods {
         Alert alert = driver.switchTo().alert();
         alert.accept();
     }
+
 
 
 }
