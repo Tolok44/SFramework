@@ -161,6 +161,14 @@ public class SMethods {
             	String text = driver.findElement(getLocator(p, LocatorType, LocatorValue)).getText();
             	Assert.assertEquals(text, value);
             	return "";
+            case "verify_alert_text":
+            	System.out.println(description);
+               	Assert.assertEquals(getAlertText(), value);
+            	return "";
+            case "submit":
+            	System.out.println(description);
+                submit(getLocator(p,LocatorType, LocatorValue));
+                return "";
             default:
                 throw new Exception("Keyword erronea");
         }
@@ -224,15 +232,25 @@ public class SMethods {
 
 
     }
-
-    public void alertOk (){
-        WebDriverWait wait30 = new WebDriverWait(driver, 30);
+    
+    public Alert getAlert() {
+    	WebDriverWait wait30 = new WebDriverWait(driver, 30);
         wait30.until(ExpectedConditions.alertIsPresent());
         Alert alert = driver.switchTo().alert();
-        alert.accept();
+        return alert;
     }
 
+    public void alertOk (){
+        getAlert().accept();
+    }
 
+    public String getAlertText (){
+        return getAlert().getText();
+    }
+
+    public void submit(By by){
+        new WebDriverWait(driver, 15).until(ExpectedConditions.elementToBeClickable(by)).submit();
+    }
 
 }
 
