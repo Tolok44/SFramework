@@ -41,21 +41,14 @@ public class RunnerSelenium {
 
         System.setProperty("webdriver.chrome.driver", ".\\Driver\\chromedriver.exe");
         // Set the driver if this is a selenium test
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+
 
 
         // you can customize the report name if omitted default will be used
         test = extent.createTest("MyFirstTest", "Sample description");
 
 
-        GUI gui = new GUI();
 
-        String[] info = gui.showGui();
-        path = info[0];
-        fileName = info[1];
-        tcSelected = info[2];
 
 
 
@@ -63,7 +56,16 @@ public class RunnerSelenium {
 
     @DataProvider(name="pasos")
     Object[][] getData() throws IOException{
+        GUI gui = new GUI();
+
+        String[] info = gui.showGui();
+        path = info[0];
+        fileName = info[1];
+        tcSelected = info[2];
         List<StepSelenium> steps = GetTCData.getStepSelenium(path, fileName, tcSelected);
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
         Object[][] datos = new Object[steps.size()][1];
         for(int row=0;row<steps.size();row++) {
             datos[row][0]=steps.get(row);
