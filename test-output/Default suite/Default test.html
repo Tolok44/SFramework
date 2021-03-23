@@ -1,0 +1,94 @@
+<html>
+<head>
+<title>TestNG:  Default test</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>Default test</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>3/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Tue Mar 23 15:39:07 CST 2021</td>
+</tr>
+<tr><td>Total time:</td><td>29 seconds (29243 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='report.RunnerSelenium.testCase()'><b>testCase</b><br>Test class: report.RunnerSelenium<br>Parameters: [StepSelenium [number=1.0, keyword=GOTO, locatorType=NA, locatorValue=NA, value=https://scrum-metrics.herokuapp-com/start/login, description=login unsuccessfull username too short, stepDescription=Go to login page], StepSelenium [number=2.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnGetStartHome, value=NA, description=login unsuccessfull username too short, stepDescription=click on getting started], StepSelenium [number=3.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnLoginStartHome, value=NA, description=login unsuccessfull username too short, stepDescription=click on login], StepSelenium [number=4.0, keyword=TYPETEXT, locatorType=xpath, locatorValue=Dic_txtUserNameLogin, value=user, description=login unsuccessfull username too short, stepDescription=fill user name text box], StepSelenium [number=5.0, keyword=GETTEXT, locatorType=xpath, locatorValue=Dic_errorUserNameLogin, value=NA, description=login unsuccessfull username too short, stepDescription=get error message]]</td>
+<td></td>
+<td>0</td>
+<td>report.RunnerSelenium@16d04d3d</td></tr>
+<tr>
+<td title='report.RunnerSelenium.testCase()'><b>testCase</b><br>Test class: report.RunnerSelenium<br>Parameters: [StepSelenium [number=1.0, keyword=GOTO, locatorType=NA, locatorValue=NA, value=Dic_urlHome, description=Go to home page and login successfull, stepDescription=Go to home page], StepSelenium [number=2.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnGetStartHome, value=NA, description=Go to home page and login successfull, stepDescription=click on getting started], StepSelenium [number=3.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnLoginStartHome, value=NA, description=Go to home page and login successfull, stepDescription=click on login], StepSelenium [number=4.0, keyword=TYPETEXT, locatorType=xpath, locatorValue=Dic_txtUserNameLogin, value=jlchacon, description=Go to home page and login successfull, stepDescription=fill user name text box], StepSelenium [number=2.0, keyword=TYPETEXT, locatorType=xpath, locatorValue=Dic_txtUserPasswordLogin, value=Hexaware123!, description=Go to home page and login successfull, stepDescription=fill password text box], StepSelenium [number=3.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnLoginLogin, value=NA, description=Go to home page and login successfull, stepDescription=click onLoin button]]</td>
+<td></td>
+<td>10</td>
+<td>report.RunnerSelenium@16d04d3d</td></tr>
+<tr>
+<td title='report.RunnerSelenium.testCase()'><b>testCase</b><br>Test class: report.RunnerSelenium<br>Parameters: [StepSelenium [number=1.0, keyword=GOTO, locatorType=NA, locatorValue=NA, value=https://scrum-metrics.herokuapp-com/start/login, description=login unsuccessfull username too large, stepDescription=Go to login page], StepSelenium [number=2.0, keyword=CLICK, locatorType=ENDCASE, locatorValue=Dic_btnGetStartHome, value=NA, description=login unsuccessfull username too large, stepDescription=click on getting started], StepSelenium [number=3.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnLoginStartHome, value=NA, description=login unsuccessfull username too large, stepDescription=click on login], StepSelenium [number=4.0, keyword=TYPETEXT, locatorType=xpath, locatorValue=Dic_txtUserNameLogin, value=user1234567890123456789012345678901234567890, description=login unsuccessfull username too large, stepDescription=fill user name text box], StepSelenium [number=5.0, keyword=GETTEXT, locatorType=xpath, locatorValue=Dic_errorUserNameLogin, value=NA, description=login unsuccessfull username too large, stepDescription=get error message]]</td>
+<td></td>
+<td>0</td>
+<td>report.RunnerSelenium@16d04d3d</td></tr>
+</table><p>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2021-03-23T15:39:07 CST" name="Default suite" finished-at="2021-03-23T15:39:36 CST" duration-ms="29243">
+    <groups>
+    </groups>
+    <test started-at="2021-03-23T15:39:07 CST" name="Default test" finished-at="2021-03-23T15:39:36 CST" duration-ms="29243">
+      <class name="report.RunnerSelenium">
+        <test-method is-config="true" signature="setClass()[pri:0, instance:report.RunnerSelenium@16d04d3d]" started-at="2021-03-23T15:39:07 CST" name="setClass" finished-at="2021-03-23T15:39:10 CST" duration-ms="2824" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setClass -->
+        <test-method signature="testCase(java.util.List)[pri:0, instance:report.RunnerSelenium@16d04d3d]" started-at="2021-03-23T15:39:25 CST" name="testCase" data-provider="pasos" finished-at="2021-03-23T15:39:35 CST" duration-ms="10214" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[StepSelenium [number=1.0, keyword=GOTO, locatorType=NA, locatorValue=NA, value=Dic_urlHome, description=Go to home page and login successfull, stepDescription=Go to home page], StepSelenium [number=2.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnGetStartHome, value=NA, description=Go to home page and login successfull, stepDescription=click on getting started], StepSelenium [number=3.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnLoginStartHome, value=NA, description=Go to home page and login successfull, stepDescription=click on login], StepSelenium [number=4.0, keyword=TYPETEXT, locatorType=xpath, locatorValue=Dic_txtUserNameLogin, value=jlchacon, description=Go to home page and login successfull, stepDescription=fill user name text box], StepSelenium [number=2.0, keyword=TYPETEXT, locatorType=xpath, locatorValue=Dic_txtUserPasswordLogin, value=Hexaware123!, description=Go to home page and login successfull, stepDescription=fill password text box], StepSelenium [number=3.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnLoginLogin, value=NA, description=Go to home page and login successfull, stepDescription=click onLoin button]]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCase -->
+        <test-method signature="testCase(java.util.List)[pri:0, instance:report.RunnerSelenium@16d04d3d]" started-at="2021-03-23T15:39:35 CST" name="testCase" data-provider="pasos" finished-at="2021-03-23T15:39:36 CST" duration-ms="503" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[StepSelenium [number=1.0, keyword=GOTO, locatorType=NA, locatorValue=NA, value=https://scrum-metrics.herokuapp-com/start/login, description=login unsuccessfull username too short, stepDescription=Go to login page], StepSelenium [number=2.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnGetStartHome, value=NA, description=login unsuccessfull username too short, stepDescription=click on getting started], StepSelenium [number=3.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnLoginStartHome, value=NA, description=login unsuccessfull username too short, stepDescription=click on login], StepSelenium [number=4.0, keyword=TYPETEXT, locatorType=xpath, locatorValue=Dic_txtUserNameLogin, value=user, description=login unsuccessfull username too short, stepDescription=fill user name text box], StepSelenium [number=5.0, keyword=GETTEXT, locatorType=xpath, locatorValue=Dic_errorUserNameLogin, value=NA, description=login unsuccessfull username too short, stepDescription=get error message]]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCase -->
+        <test-method signature="testCase(java.util.List)[pri:0, instance:report.RunnerSelenium@16d04d3d]" started-at="2021-03-23T15:39:36 CST" name="testCase" data-provider="pasos" finished-at="2021-03-23T15:39:36 CST" duration-ms="127" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[StepSelenium [number=1.0, keyword=GOTO, locatorType=NA, locatorValue=NA, value=https://scrum-metrics.herokuapp-com/start/login, description=login unsuccessfull username too large, stepDescription=Go to login page], StepSelenium [number=2.0, keyword=CLICK, locatorType=ENDCASE, locatorValue=Dic_btnGetStartHome, value=NA, description=login unsuccessfull username too large, stepDescription=click on getting started], StepSelenium [number=3.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnLoginStartHome, value=NA, description=login unsuccessfull username too large, stepDescription=click on login], StepSelenium [number=4.0, keyword=TYPETEXT, locatorType=xpath, locatorValue=Dic_txtUserNameLogin, value=user1234567890123456789012345678901234567890, description=login unsuccessfull username too large, stepDescription=fill user name text box], StepSelenium [number=5.0, keyword=GETTEXT, locatorType=xpath, locatorValue=Dic_errorUserNameLogin, value=NA, description=login unsuccessfull username too large, stepDescription=get error message]]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCase -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:report.RunnerSelenium@16d04d3d]" started-at="2021-03-23T15:39:36 CST" name="tearDown" finished-at="2021-03-23T15:39:37 CST" duration-ms="1485" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- report.RunnerSelenium -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
