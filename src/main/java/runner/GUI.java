@@ -3,16 +3,25 @@ package runner;
 import excelManager.ReadExcelFile;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.FileFilter;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class GUI {
 
     public String[] showGui() throws IOException {
         javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel files", "xls", "xlsx");
+        jfc.setFileFilter(filter);
         String path = "";
         String fileName = "";
         String[] tcSelected;
         String[] dataReturn = new String[3];
+
+
+
         try {
             if(jfc.showSaveDialog(null) == jfc.APPROVE_OPTION){
                 path = jfc.getSelectedFile().getPath();
