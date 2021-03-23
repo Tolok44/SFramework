@@ -152,6 +152,9 @@ public class SMethods {
             case "date":
                 calendar(p, LocatorType, LocatorValue, value);
                 return "";
+            case "project":
+                projList(p, LocatorType, LocatorValue, value);
+                return "";
             case "alertok":
                 alertOk();
                 return "";
@@ -228,9 +231,17 @@ public class SMethods {
         driver.findElement(By.xpath(pickYear)).click();
         driver.findElement(By.xpath(pickMonth)).click();
         driver.findElement(By.xpath(dateLocation)).click();
-
-
-
+    }
+    
+    public void projList(Properties p, String LocatorType, String LocatorValue, String value) throws Exception {
+    	Thread.sleep(2000);
+    	String splitter[] = p.getProperty(LocatorValue).split("\\+");
+    	String projLocator = splitter[0] + value + splitter[2];
+    	String openButton = projLocator + "/parent::span/parent::mat-expansion-panel-header/following-sibling::div/div/div/button";
+    	//driver.findElement(getLocator(p, LocatorType, projLocator)).click();
+    	driver.findElement(By.xpath(projLocator)).click();
+    	driver.findElement(By.xpath(openButton)).click();
+    	
     }
     
     public Alert getAlert() {
