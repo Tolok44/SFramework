@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
+import excelManager.ReadExcelFile;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -11,6 +12,7 @@ import org.testng.annotations.*;
 
 import excelManager.GetTCData;
 import readObject.ReadObject;
+import runner.GUI;
 import runner.SMethods;
 import testCase.StepSelenium;
 
@@ -27,9 +29,12 @@ public class RunnerSelenium {
     ExtentHtmlReporter htmlReporter;
     ExtentReports extent;
     ExtentTest test;
+    String path;
+    String fileName;
+    String tcSelected;
 
     @BeforeClass
-    public void setClass() {
+    public void setClass() throws IOException {
         htmlReporter = new ExtentHtmlReporter("extent.html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
@@ -45,7 +50,12 @@ public class RunnerSelenium {
         test = extent.createTest("MyFirstTest", "Sample description");
 
 
+        GUI gui = new GUI();
 
+        String[] info = gui.showGui();
+        path = info[0];
+        fileName = info[1];
+        tcSelected = info[2];
 
 
 
@@ -53,7 +63,7 @@ public class RunnerSelenium {
 
     @DataProvider(name="pasos")
     Object[][] getData() throws IOException{
-        List<StepSelenium> steps = GetTCData.getStepSelenium();
+        List<StepSelenium> steps = GetTCData.getStepSelenium(path, fileName, tcSelected);
         Object[][] datos = new Object[steps.size()][1];
         for(int row=0;row<steps.size();row++) {
             datos[row][0]=steps.get(row);
