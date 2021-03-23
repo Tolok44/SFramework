@@ -156,11 +156,13 @@ public class SMethods {
                 alertOk();
                 return "";
             case "verify_text":
-            case "asserttextequals":
             	System.out.println(description);
             	String text = driver.findElement(getLocator(p, LocatorType, LocatorValue)).getText();
             	Assert.assertEquals(text, value);
             	return "";
+            case "wait":
+                Thread.sleep(1000);
+                return "";
             default:
                 throw new Exception("Keyword erronea");
         }
@@ -203,13 +205,9 @@ public class SMethods {
 
     public void calendar(Properties p, String LocatorType, String LocatorValue, String value) throws Exception {
 
-        String monthLocator = "";
         String splitter[] = value.split("\\s+");
-        String day = splitter[0];
         String month = splitter[1];
         String year = splitter[2];
-        boolean yet = false;
-        String subMonth = month.substring(0,3);
         String splitter2[] = LocatorValue.split("\\+");
         String dateLocation = splitter2[0] + value + splitter2[2];
 
