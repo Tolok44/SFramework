@@ -17,7 +17,7 @@ import testCase.StepSelenium;
 
 public class GetTCData {
 
-	public static List<StepSelenium> getStepSelenium() throws IOException {
+	public static List<StepSelenium> getStepSelenium(String path, String fileName, String sheetName) throws IOException {
 		String step;
 		String keyword;
 		String locatorType;
@@ -28,7 +28,9 @@ public class GetTCData {
 
 		List<StepSelenium> steps = new ArrayList<>();
 		ReadExcelFile excel = new ReadExcelFile();
-		Sheet sheet = excel.readExcel(".\\TestCases\\Front", "UserRegistrationPlantilla.xlsx", "UR01");
+		Sheet sheet = excel.readExcel(path, fileName, sheetName);
+
+
 		Iterator<Row> rowIterator = sheet.iterator();
 		Row row = rowIterator.next();
 		while (rowIterator.hasNext()) {
@@ -60,7 +62,7 @@ public class GetTCData {
 		return steps;
 	}
 
-	public static List<StepAPI> getStepAPI() throws IOException {
+	public static List<StepAPI> getStepAPI(String path, String fileName, String sheetName) throws IOException {
 		String description;
 		String step;
 		String keyword;
@@ -75,7 +77,7 @@ public class GetTCData {
 
 		List<StepAPI> steps = new ArrayList<>();
 		ReadExcelFile excel = new ReadExcelFile();
-		Sheet sheet = excel.readExcel(".\\TestCases\\Back", "plantillaBack.xlsx", "TC03");
+		Sheet sheet = excel.readExcel(path, fileName, sheetName);
 		Iterator<Row> rowIterator = sheet.iterator();
 		Row row = rowIterator.next();
 		while (rowIterator.hasNext()) {
