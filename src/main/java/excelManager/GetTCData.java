@@ -29,32 +29,34 @@ public class GetTCData {
 		List<StepSelenium> steps = new ArrayList<>();
 		ReadExcelFile excel = new ReadExcelFile();
 		Sheet sheet = excel.readExcel(path, fileName, sheetName);
+
+
 		Iterator<Row> rowIterator = sheet.iterator();
 		Row row = rowIterator.next();
-		while(rowIterator.hasNext()) {
+		while (rowIterator.hasNext()) {
 			row = rowIterator.next();
 			int rowsize = row.getLastCellNum();
 			String contenido;
 			try {
 				Cell cel = row.getCell(0);
-				contenido = row.getCell(0).toString();
-			}
-			catch(NullPointerException e) {
+				contenido = stripString(row.getCell(0).toString());
+			} catch (NullPointerException e) {
 				contenido = "";
 			}
-			if(contenido.length() != 0) {
-				String TestCaseName = row.getCell(0).toString();
-				if(TestCaseName.equals("ENDCASE")) break;
-				description = row.getCell(1).toString();
-			}
-			else {
-				stepDescription = row.getCell(2).toString();
-				step = row.getCell(3).toString();
-				keyword = row.getCell(4).toString();
-				locatorType = row.getCell(5).toString();
-				locatorValue = row.getCell(6).toString();
-				values = row.getCell(7).toString();
-				steps.add(new StepSelenium(step, keyword, locatorType, locatorValue, values, description, stepDescription));
+			if (contenido.length() != 0) {
+				String TestCaseName = stripString(row.getCell(0).toString());
+				if (TestCaseName.equals("ENDCASE"))
+					break;
+				description = stripString(row.getCell(1).toString());
+			} else {
+				stepDescription = stripString(row.getCell(2).toString());
+				step = stripString(row.getCell(3).toString());
+				keyword = stripString(row.getCell(4).toString());
+				locatorType = stripString(row.getCell(5).toString());
+				locatorValue = stripString(row.getCell(6).toString());
+				values = stripString(row.getCell(7).toString());
+				steps.add(new StepSelenium(step, keyword, locatorType, locatorValue, values, description,
+						stepDescription));
 			}
 		}
 		return steps;
@@ -65,7 +67,8 @@ public class GetTCData {
 		String step;
 		String keyword;
 		String url;
-		String uri;;
+		String uri;
+		;
 		String parameters;
 		JSONObject valueAPI;
 		String statusCode;
@@ -77,7 +80,7 @@ public class GetTCData {
 		Sheet sheet = excel.readExcel(path, fileName, sheetName);
 		Iterator<Row> rowIterator = sheet.iterator();
 		Row row = rowIterator.next();
-		while(rowIterator.hasNext()) {
+		while (rowIterator.hasNext()) {
 			row = rowIterator.next();
 			int rowsize = row.getLastCellNum();
 			String contenido;
@@ -86,21 +89,18 @@ public class GetTCData {
 			try {
 				cel = row.getCell(0);
 				contenido = row.getCell(0).toString();
-			}
-			catch(NullPointerException e) {
+			} catch (NullPointerException e) {
 				contenido = "";
 			}
 			try {
 				cel = row.getCell(1);
 				contenidoStep = row.getCell(1).toString();
-			}
-			catch(NullPointerException e) {
+			} catch (NullPointerException e) {
 				contenidoStep = "";
 			}
-			if(contenido.length() != 0) {
+			if (contenido.length() != 0) {
 				description = row.getCell(0).toString();
-			}
-			else if (contenido.length() == 0 && contenidoStep.length()>0){
+			} else if (contenido.length() == 0 && contenidoStep.length() > 0) {
 				step = row.getCell(1).toString();
 				keyword = row.getCell(2).toString();
 				url = row.getCell(3).toString();
@@ -110,10 +110,14 @@ public class GetTCData {
 				statusCode = row.getCell(7).toString();
 				validationType = row.getCell(8).toString();
 				validationValue = row.getCell(9).toString();
-				steps.add(new StepAPI(step, keyword, url, uri, parameters,valueAPI, statusCode,
-						validationType, validationValue));
+				steps.add(new StepAPI(step, keyword, url, uri, parameters, valueAPI, statusCode, validationType,
+						validationValue));
 			}
 		}
 		return steps;
+	}
+
+	public static String stripString(String value) {
+		return value.replaceFirst("^\\s++", "").replaceFirst("\\s++$", "");
 	}
 }
