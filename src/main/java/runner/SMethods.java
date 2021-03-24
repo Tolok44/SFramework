@@ -10,6 +10,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.util.Properties;
 
 
@@ -171,6 +176,9 @@ public class SMethods {
             	System.out.println(description);
                 submit(getLocator(p,LocatorType, LocatorValue));
                 return "";
+            case "uplphoto":
+            	System.out.println(description);
+            	selectPhoto(value);
             case "wait":
                 Thread.sleep(1000);
             default:
@@ -259,6 +267,28 @@ public class SMethods {
     public void submit(By by){
         new WebDriverWait(driver, 15).until(ExpectedConditions.elementToBeClickable(by)).submit();
     }
+    
+    public void selectPhoto(String path) {
+		// Copia imagen al Clipboard
+		StringSelection ss = new StringSelection(path);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+		// native key strokes for CTRL, V and ENTER keys
+		Robot robot;
+		try {
+			Thread.sleep(1000); // is this necessary ?
+			robot = new Robot();
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+		} catch (AWTException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+	}
 
 }
 
