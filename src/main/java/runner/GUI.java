@@ -50,7 +50,7 @@ public class GUI {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         JLabel label = new JLabel();
-        label.setText("Which Test Cases wish execute");
+        label.setText("Select Test Cases to execute");
         panel.add(label);
         panel.setBounds(10, 10, 375, 150);
 
@@ -76,18 +76,20 @@ public class GUI {
 
         /** This for save the selected Test cases */
         tcSelected = new String[radio.length];
+        String radios="";
         for (int t = 0; t < radio.length; t++) {
 
             if (radio[t].isSelected()) {
 
-                tcSelected[t] = radio[t].getText();
+                //tcSelected[t] = radio[t].getText();
+                radios += radio[t].getText()+"-";
 
             }
         }
 
         dataReturn[0] = path;
         dataReturn[1] = fileName;
-        dataReturn[2] = tcSelected[0];
+        dataReturn[2] = radios;
 
         return dataReturn;
 

@@ -10,8 +10,9 @@ public class StepSelenium {
     private String value;
     private String description;
     private String stepDescription;
+    private String name;
 
-    public StepSelenium(String number, String keyword, String locatorType, String locatorValue, String value, String description, String stepDescription) {
+    public StepSelenium(String number, String keyword, String locatorType, String locatorValue, String value, String description, String stepDescription, String name) {
         this.number = number;
         this.keyword = keyword;
         this.locatorType = locatorType;
@@ -19,6 +20,7 @@ public class StepSelenium {
         this.value = value;
         this.description = description;
         this.stepDescription = stepDescription;
+        this.name = name;
     }
 
     public void setNumber(String number) {
@@ -75,6 +77,21 @@ public class StepSelenium {
 
     public String getStepDescription() {
         return this.stepDescription;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "StepSelenium [number=" + number + ", keyword=" + keyword + ", locatorType=" + locatorType
+                + ", locatorValue=" + locatorValue + ", value=" + value + ", description=" + description
+                + ", stepDescription=" + stepDescription + "]";
     }
 
 }
