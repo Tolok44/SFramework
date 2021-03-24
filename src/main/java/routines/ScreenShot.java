@@ -1,15 +1,9 @@
 package routines;
 
-import io.qameta.allure.Allure;
-
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-
 
 public class ScreenShot {
 
@@ -49,17 +43,12 @@ public class ScreenShot {
         }
     }
 
-    public void addingScreenShotAllure(WebDriver driver) {
-        try {
-            Allure.addAttachment("Screenshot has been added", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
-            System.out.println("**********************************+***+");
-            System.out.println("Screenshot has been added successfully on Allure");
-            System.out.println("**********************************+***+");
+    public void borderLine(WebDriver driver,String locatorValue) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].setAttribute('style', 'border: 2px solid red;');", locatorValue, "color yellow; border: 2px solid yellow;");
 
-        } catch (Exception e) {
-            System.out.println("**********************************+***+");
-            System.out.println("The screenshot has not been added");
-            System.out.println("**********************************+***+");
-        }
+        System.out.println("**********************************+***+");
+        System.out.println("Object selected");
+        System.out.println("**********************************+***+");
     }
 }
