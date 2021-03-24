@@ -11,6 +11,7 @@ public class StepSelenium {
     private String description;
     private String stepDescription;
     private String name;
+    private String takeScreenShot;
 
     public StepSelenium(String number, String keyword, String locatorType, String locatorValue, String value, String description, String stepDescription, String name) {
         this.number = number;
@@ -21,6 +22,7 @@ public class StepSelenium {
         this.description = description;
         this.stepDescription = stepDescription;
         this.name = name;
+        this.takeScreenShot = number;
     }
 
     public void setNumber(String number) {
@@ -86,6 +88,14 @@ public class StepSelenium {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public String getTakeScreenShot() {
+		return takeScreenShot;
+	}
+
+	public void setTakeScreenShot(String takeScreenShot) {
+		this.takeScreenShot = takeScreenShot;
+	}
 
     @Override
     public String toString() {
