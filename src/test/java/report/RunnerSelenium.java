@@ -17,6 +17,7 @@ import runner.SMethods;
 import testCase.StepSelenium;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -40,16 +41,6 @@ public class RunnerSelenium {
         extent.attachReporter(htmlReporter);
 
         System.setProperty("webdriver.chrome.driver", ".\\Driver\\chromedriver.exe");
-        // Set the driver if this is a selenium test
-
-
-
-        // you can customize the report name if omitted default will be used
-        test = extent.createTest("MyFirstTest", "Sample description");
-
-
-
-
 
 
     }
@@ -57,18 +48,23 @@ public class RunnerSelenium {
     @DataProvider(name="pasos")
     Object[][] getData() throws IOException{
         GUI gui = new GUI();
-
+        List<List<StepSelenium>> testCases = new ArrayList<>();
         String[] info = gui.showGui();
         path = info[0];
         fileName = info[1];
         tcSelected = info[2];
-        List<StepSelenium> steps = GetTCData.getStepSelenium(path, fileName, tcSelected);
+        String[] cases = tcSelected.split("-");
+        for(int i=0; i<cases.length;i++) {
+            List<StepSelenium> steps = GetTCData.getStepSelenium(path, fileName, cases[i]);
+            testCases.add(steps);
+        }
+
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        Object[][] datos = new Object[steps.size()][1];
-        for(int row=0;row<steps.size();row++) {
-            datos[row][0]=steps.get(row);
+        Object[][] datos = new Object[testCases.size()][1];
+        for(int row=0;row<testCases.size();row++) {
+            datos[row][0]=testCases.get(row);
         }
         return datos;
     }
@@ -76,19 +72,25 @@ public class RunnerSelenium {
 
     //test de data provider
     @Test(dataProvider="pasos")
-    public void testCase(StepSelenium step) throws IOException{
+    public void testCase(List<StepSelenium> pasos) throws IOException{
         ReadObject object = new ReadObject();
         Properties allObjects = object.getProperties();
         SMethods fw = new SMethods(driver);
-        try {
-            fw.realizar(allObjects, step.getKeyword(), step.getLocatorType(), step.getLocatorValue(), step.getValue(), step.getStepDescription());
-            test.pass(step.getStepDescription());
+        StepSelenium paso1 = pasos.get(0);
+        test = extent.createTest(paso1.getName(), paso1.getDescription());
+        for(StepSelenium step : pasos) {
+            try {
+                // you can customize the report name if omitted default will be used
+                fw.realizar(allObjects, step.getKeyword(), step.getLocatorType(), step.getLocatorValue(), step.getValue(), step.getStepDescription());
+                test.pass(step.getStepDescription());
+            }
+            catch(Exception | AssertionError e) {
+                test.fail(step.getStepDescription());
+                test.error(e.getMessage());
+            }
         }
-        catch(Exception | AssertionError e) {
-            test.fail(step.getStepDescription());
-            test.error(e.getMessage());
-        }
-     }
+
+    }
 
 
     @AfterSuite
