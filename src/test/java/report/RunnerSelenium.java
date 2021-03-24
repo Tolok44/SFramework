@@ -102,20 +102,24 @@ public class RunnerSelenium {
 		StepSelenium paso1 = pasos.get(0);
 		test = extent.createTest(paso1.getName(), paso1.getDescription());
 		Integer stepNo = 1;
+		Boolean TCFailed = false;
 		for (StepSelenium step : pasos) {
 			try {
-				// you can customize the report name if omitted default will be used
-				fw.realizar(allObjects, step.getKeyword(), step.getLocatorType(), step.getLocatorValue(),
-						step.getValue(), step.getStepDescription());
-//				test.pass(step.getStepDescription());
-				test.pass(getReportStepDescription(stepNo, step));
-				if (step.getTakeScreenShot().equals("y")) {
-					addDetails(test, step);
+				if (!TCFailed) {
+					fw.realizar(allObjects, step.getKeyword(), step.getLocatorType(), step.getLocatorValue(),
+							step.getValue(), step.getStepDescription());
+					test.pass(getReportStepDescription(stepNo, step));
+					if (step.getTakeScreenShot().equals("y")) {
+						addDetails(test, step);
+					}
+				} else {
+					test.skip(getReportStepDescription(stepNo, step));
 				}
 			} catch (Exception | AssertionError e) {
 				test.fail(getReportStepDescription(stepNo, step));
 				addDetails(test, step);
 				test.error(e.getMessage());
+				TCFailed = true;
 			}
 			stepNo++;
 		}
