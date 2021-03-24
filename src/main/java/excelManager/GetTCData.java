@@ -51,13 +51,18 @@ public class GetTCData {
 				description = stripString(row.getCell(1).toString());
 			} else {
 				stepDescription = stripString(row.getCell(2).toString());
-				step = stripString(row.getCell(3).toString());
+				try {
+					step = stripString(row.getCell(3).toString());
+				} catch (NullPointerException e) {
+					step = "";
+				}
 				keyword = stripString(row.getCell(4).toString());
 				locatorType = stripString(row.getCell(5).toString());
 				locatorValue = stripString(row.getCell(6).toString());
 				values = stripString(row.getCell(7).toString());
 				steps.add(new StepSelenium(step, keyword, locatorType, locatorValue, values, description,
 						stepDescription, TestCaseName));
+				
 			}
 		}
 		return steps;
