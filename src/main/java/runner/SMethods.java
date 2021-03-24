@@ -152,7 +152,7 @@ public class SMethods {
             case "date":
                 calendar(p, LocatorType, LocatorValue, value);
                 return "";
-            case "project":
+            case "open_project":
                 projList(p, LocatorType, LocatorValue, value);
                 return "";
             case "alertok":
