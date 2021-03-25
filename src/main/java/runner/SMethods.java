@@ -3,6 +3,8 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -157,6 +159,9 @@ public class SMethods {
             case "date":
                 calendar(p, LocatorType, LocatorValue, value);
                 return "";
+            case "select_date":
+            	calendar2(p, LocatorType, LocatorValue, value);
+            	return "";
             case "open_project":
                 projList(p, LocatorType, LocatorValue, value);
                 return "";
@@ -183,6 +188,14 @@ public class SMethods {
             case "wait":
                 Thread.sleep(1000);
                 return "";
+            case "alert_not_exists":
+            	boolean existe = isAlertPresent();
+            	Assert.assertTrue(!existe);
+            	return "";
+            case "verify_user":
+            	boolean user = verifyUser(value);
+            	Assert.assertTrue(user);
+            	return"";
             default:
                 throw new Exception("Keyword erronea");
         }
@@ -291,6 +304,41 @@ public class SMethods {
 			e1.printStackTrace();
 		}
 	}
+    
+    public void calendar2(Properties p, String LocatorType, String LocatorValue, String value) throws Exception {
+    	String[] fecha = value.split(" ");
+    	String day = fecha[0];
+    	String month = fecha[1];
+    	String year = fecha[2];
+    	String pickYear = "//td[@aria-label='" + year + "']";
+    	String pickMonth = "//td[@aria-label='" + month + " " + year + "']";
+    	String date = "//td[@aria-label='" + day + " " + month + " " + year + "']";
+    	driver.findElement(getLocator(p, LocatorType, "Dic_btnChooseDateProject")).click();
+        driver.findElement(By.xpath(pickYear)).click();
+        driver.findElement(By.xpath(pickMonth)).click();
+        driver.findElement(By.xpath(date)).click();
+    	
+    }
+    
+    public boolean isAlertPresent() {
+    	try {
+    		driver.switchTo().alert();
+    		return true;
+    	}catch(NoAlertPresentException Ex){
+    		 return false; 
+    	}
+    	
+    }
+    
+    public boolean verifyUser(String value) {
+    	try {
+    		System.out.println("//*[contains(text(), '" + value +"')]");
+    		driver.findElement(By.xpath("//*[contains(text(), '" + value +"')]"));
+    		return true;
+    	}catch(NoSuchElementException Ex){
+    		 return false; 
+    	}
+    }
 
 }
 
