@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2021-03-25T16:14:52 CST" name="Default suite" finished-at="2021-03-25T16:15:36 CST" duration-ms="44633">
+    <groups>
+    </groups>
+    <test started-at="2021-03-25T16:14:52 CST" name="Default test" finished-at="2021-03-25T16:15:36 CST" duration-ms="44633">
+      <class name="report.RunnerSelenium">
+        <test-method is-config="true" signature="setClass()[pri:0, instance:report.RunnerSelenium@1623b78d]" started-at="2021-03-25T16:14:52 CST" name="setClass" finished-at="2021-03-25T16:14:52 CST" duration-ms="200" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setClass -->
+        <test-method signature="testCase(java.util.List)[pri:0, instance:report.RunnerSelenium@1623b78d]" started-at="2021-03-25T16:15:10 CST" name="testCase" data-provider="pasos" finished-at="2021-03-25T16:15:36 CST" duration-ms="26306" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[StepSelenium [number=1.0, keyword=GOTO, locatorType=NA, locatorValue=NA, value=Dic_urlHome, description=Try to create a project without a description., stepDescription=Navigate to the App], StepSelenium [number=2.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnGetStartHome, value=NA, description=Try to create a project without a description., stepDescription=Click on getting started], StepSelenium [number=3.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnLoginStartHome, value=NA, description=Try to create a project without a description., stepDescription=Click on Login], StepSelenium [number=4.0, keyword=TYPE, locatorType=xpath, locatorValue=Dic_txtUserNameLogin, value=JesusH, description=Try to create a project without a description., stepDescription=Type the username.], StepSelenium [number=5.0, keyword=TYPE, locatorType=xpath, locatorValue=Dic_txtUserPasswordLogin, value=Jesus@te5t, description=Try to create a project without a description., stepDescription=Type the password.], StepSelenium [number=6.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnLoginLogin, value=NA, description=Try to create a project without a description., stepDescription=Click on login], StepSelenium [number=7.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnMenuProject, value=NA, description=Try to create a project without a description., stepDescription=Click the hamburguer icon at the top left corner], StepSelenium [number=8.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnNewProjectProject, value=NA, description=Try to create a project without a description., stepDescription=Click on the button], StepSelenium [number=9.0, keyword=TYPE, locatorType=xpath, locatorValue=Dic_txtProjectNameProject, value=project without description automated 2, description=Try to create a project without a description., stepDescription=Type the text on the project name box.], StepSelenium [number=9.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_selectRole, value=NA, description=Try to create a project without a description., stepDescription=Click on role dropdown], StepSelenium [number=10.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_optTM, value=NA, description=Try to create a project without a description., stepDescription=Click on team member], StepSelenium [number=11.0, keyword=TYPE, locatorType=xpath, locatorValue=Dic_txtMemberUserProject, value=JesusH, description=Try to create a project without a description., stepDescription=Type the usename on the "search by username" field], StepSelenium [number=10.0, keyword=WAIT, locatorType=NA, locatorValue=NA, value=NA, description=Try to create a project without a description., stepDescription=esperar], StepSelenium [number=12.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnAddMemberProject, value=NA, description=Try to create a project without a description., stepDescription=Click on add], StepSelenium [number=14.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnStartDate, value=NA, description=Try to create a project without a description., stepDescription=Click on the calendar on the start section form.], StepSelenium [number=15.0, keyword=SELECT_DATE, locatorType=xpath, locatorValue=NA, value=24 March 2021, description=Try to create a project without a description., stepDescription=Select today's date.], StepSelenium [number=16.0, keyword=CLICK, locatorType=xpath, locatorValue=Dic_btnCreateProjectProject, value=NA, description=Try to create a project without a description., stepDescription=Click on create.], StepSelenium [number=10.0, keyword=WAIT, locatorType=NA, locatorValue=NA, value=NA, description=Try to create a project without a description., stepDescription=esperar], StepSelenium [number=17.0, keyword=alert_not_exists, locatorType=NA, locatorValue=NA, value=NA, description=Try to create a project without a description., stepDescription=Check if the project isn't created.]]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCase -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:report.RunnerSelenium@1623b78d]" started-at="2021-03-25T16:15:36 CST" name="tearDown" finished-at="2021-03-25T16:15:38 CST" duration-ms="1403" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- report.RunnerSelenium -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
