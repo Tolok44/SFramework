@@ -179,8 +179,10 @@ public class SMethods {
             case "uplphoto":
             	System.out.println(description);
             	selectPhoto(value);
+            	return "";
             case "wait":
                 Thread.sleep(1000);
+                return "";
             default:
                 throw new Exception("Keyword erronea");
         }
