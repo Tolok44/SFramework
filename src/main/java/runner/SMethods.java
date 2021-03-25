@@ -228,12 +228,13 @@ public class SMethods {
         String splitter[] = value.split("\\s+");
         String month = splitter[1];
         String year = splitter[2];
-        String splitter2[] = LocatorValue.split("\\+");
+        String splitter2[] =p.getProperty(LocatorValue).split("\\+");
         String dateLocation = splitter2[0] + value + splitter2[2];
 
         String pickYear = splitter2[0] + year + splitter2[2];
         String pickMonth = splitter2[0] + month + " " + year + splitter2[2];
-
+        
+        driver.findElement(getLocator(p, LocatorType, "Dic_btnStartDateProject")).click();
         driver.findElement(getLocator(p, LocatorType, "Dic_btnChooseDateProject")).click();
         driver.findElement(By.xpath(pickYear)).click();
         driver.findElement(By.xpath(pickMonth)).click();
@@ -245,7 +246,6 @@ public class SMethods {
     	String splitter[] = p.getProperty(LocatorValue).split("\\+");
     	String projLocator = splitter[0] + value + splitter[2];
     	String openButton = projLocator + "/parent::span/parent::mat-expansion-panel-header/following-sibling::div/div/div/button";
-    	//driver.findElement(getLocator(p, LocatorType, projLocator)).click();
     	driver.findElement(By.xpath(projLocator)).click();
     	driver.findElement(By.xpath(openButton)).click();
     	
