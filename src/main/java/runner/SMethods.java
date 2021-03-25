@@ -3,6 +3,8 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,11 +12,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
 import java.util.Properties;
 
 
@@ -157,6 +154,9 @@ public class SMethods {
             case "date":
                 calendar(p, LocatorType, LocatorValue, value);
                 return "";
+            case "select_date":
+            	calendar2(p, LocatorType, LocatorValue, value);
+            	return "";
             case "open_project":
                 projList(p, LocatorType, LocatorValue, value);
                 return "";
@@ -170,19 +170,24 @@ public class SMethods {
             	return "";
             case "verify_alert_text":
             	System.out.println(description);
+            	System.out.println(getAlertText());
                	Assert.assertEquals(getAlertText(), value);
             	return "";
             case "submit":
             	System.out.println(description);
                 submit(getLocator(p,LocatorType, LocatorValue));
                 return "";
-            case "uplphoto":
-            	System.out.println(description);
-            	selectPhoto(value);
-            	return "";
             case "wait":
                 Thread.sleep(1000);
                 return "";
+            case "alert_not_exists":
+            	boolean existe = isAlertPresent();
+            	Assert.assertTrue(!existe);
+            	return "";
+            case "verify_user":
+            	boolean user = verifyUser(value);
+            	Assert.assertTrue(user);
+            	return"";
             default:
                 throw new Exception("Keyword erronea");
         }
@@ -228,17 +233,31 @@ public class SMethods {
         String splitter[] = value.split("\\s+");
         String month = splitter[1];
         String year = splitter[2];
-        String splitter2[] =p.getProperty(LocatorValue).split("\\+");
+        String splitter2[] = LocatorValue.split("\\+");
         String dateLocation = splitter2[0] + value + splitter2[2];
 
         String pickYear = splitter2[0] + year + splitter2[2];
         String pickMonth = splitter2[0] + month + " " + year + splitter2[2];
-        
-        driver.findElement(getLocator(p, LocatorType, "Dic_btnStartDateProject")).click();
+
         driver.findElement(getLocator(p, LocatorType, "Dic_btnChooseDateProject")).click();
         driver.findElement(By.xpath(pickYear)).click();
         driver.findElement(By.xpath(pickMonth)).click();
         driver.findElement(By.xpath(dateLocation)).click();
+    }
+    
+    public void calendar2(Properties p, String LocatorType, String LocatorValue, String value) throws Exception {
+    	String[] fecha = value.split(" ");
+    	String day = fecha[0];
+    	String month = fecha[1];
+    	String year = fecha[2];
+    	String pickYear = "//td[@aria-label='" + year + "']";
+    	String pickMonth = "//td[@aria-label='" + month + " " + year + "']";
+    	String date = "//td[@aria-label='" + day + " " + month + " " + year + "']";
+    	driver.findElement(getLocator(p, LocatorType, "Dic_btnChooseDateProject")).click();
+        driver.findElement(By.xpath(pickYear)).click();
+        driver.findElement(By.xpath(pickMonth)).click();
+        driver.findElement(By.xpath(date)).click();
+    	
     }
     
     public void projList(Properties p, String LocatorType, String LocatorValue, String value) throws Exception {
@@ -246,6 +265,7 @@ public class SMethods {
     	String splitter[] = p.getProperty(LocatorValue).split("\\+");
     	String projLocator = splitter[0] + value + splitter[2];
     	String openButton = projLocator + "/parent::span/parent::mat-expansion-panel-header/following-sibling::div/div/div/button";
+    	//driver.findElement(getLocator(p, LocatorType, projLocator)).click();
     	driver.findElement(By.xpath(projLocator)).click();
     	driver.findElement(By.xpath(openButton)).click();
     	
@@ -270,27 +290,25 @@ public class SMethods {
         new WebDriverWait(driver, 15).until(ExpectedConditions.elementToBeClickable(by)).submit();
     }
     
-    public void selectPhoto(String path) {
-		// Copia imagen al Clipboard
-		StringSelection ss = new StringSelection(path);
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-		// native key strokes for CTRL, V and ENTER keys
-		Robot robot;
-		try {
-			Thread.sleep(1000); // is this necessary ?
-			robot = new Robot();
-			robot.keyPress(KeyEvent.VK_CONTROL);
-			robot.keyPress(KeyEvent.VK_V);
-			robot.keyRelease(KeyEvent.VK_V);
-			robot.keyRelease(KeyEvent.VK_CONTROL);
-			robot.keyPress(KeyEvent.VK_ENTER);
-			robot.keyRelease(KeyEvent.VK_ENTER);
-		} catch (AWTException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
-	}
+    public boolean isAlertPresent() {
+    	try {
+    		driver.switchTo().alert();
+    		return true;
+    	}catch(NoAlertPresentException Ex){
+    		 return false; 
+    	}
+    	
+    }
+    
+    public boolean verifyUser(String value) {
+    	try {
+    		System.out.println("//*[contains(text(), '" + value +"')]");
+    		driver.findElement(By.xpath("//*[contains(text(), '" + value +"')]"));
+    		return true;
+    	}catch(NoSuchElementException Ex){
+    		 return false; 
+    	}
+    }
 
 }
 
