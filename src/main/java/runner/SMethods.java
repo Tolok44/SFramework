@@ -186,7 +186,7 @@ public class SMethods {
             	selectPhoto(value);
             	return "";
             case "wait":
-                Thread.sleep(1000);
+                espera(value);
                 return "";
             case "alert_not_exists":
             	boolean existe = isAlertPresent();
@@ -257,6 +257,7 @@ public class SMethods {
     public void projList(Properties p, String LocatorType, String LocatorValue, String value) throws Exception {
     	Thread.sleep(2000);
     	String splitter[] = p.getProperty(LocatorValue).split("\\+");
+    	System.out.println(splitter[0]);
     	String projLocator = splitter[0] + value + splitter[2];
     	String openButton = projLocator + "/parent::span/parent::mat-expansion-panel-header/following-sibling::div/div/div/button";
     	driver.findElement(By.xpath(projLocator)).click();
@@ -338,6 +339,18 @@ public class SMethods {
     	}catch(NoSuchElementException Ex){
     		 return false; 
     	}
+    }
+    
+    public void espera(String value) throws InterruptedException {
+    	System.out.println("esperando "+ value);
+    	try {
+    		int tiempo = (int)Double.parseDouble(value);
+    		System.out.println(tiempo);
+    		Thread.sleep(tiempo*1000);
+    	}catch(NumberFormatException e){
+    		System.out.println("mamaste ");
+    		Thread.sleep(1000);
+    	}    	
     }
 
 }
