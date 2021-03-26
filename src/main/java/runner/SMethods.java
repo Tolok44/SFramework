@@ -348,7 +348,6 @@ public class SMethods {
     		System.out.println(tiempo);
     		Thread.sleep(tiempo*1000);
     	}catch(NumberFormatException e){
-    		System.out.println("mamaste ");
     		Thread.sleep(1000);
     	}    	
     }
