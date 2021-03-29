@@ -9,6 +9,7 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 import excelManager.ReadExcelFile;
+import static org.apache.commons.text.StringEscapeUtils.escapeHtml4;
 
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.OutputType;
@@ -16,6 +17,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -57,6 +59,7 @@ public class RunnerSelenium {
 	String fileName;
 	String tcSelected;
 	String reportFilename;
+	String choosedDriver = "chrome";
 
 	@BeforeClass
 	public void setClass() throws IOException {
@@ -66,7 +69,7 @@ public class RunnerSelenium {
 		extent.attachReporter(htmlReporter);
 
 		System.setProperty("webdriver.chrome.driver", ".\\Driver\\chromedriver.exe");
-
+		System.setProperty("webdriver.firefox.driver", ".\\Driver\\geckodriver.exe");
 	}
 
 	@DataProvider(name = "pasos")
@@ -77,20 +80,28 @@ public class RunnerSelenium {
 		path = info[0];
 		fileName = info[1];
 		tcSelected = info[2];
+//		choosedDriver = info[3]; // chrome or firefox
 		String[] cases = tcSelected.split("-");
 		for (int i = 0; i < cases.length; i++) {
 			List<StepSelenium> steps = GetTCData.getStepSelenium(path, fileName, cases[i]);
 			testCases.add(steps);
 		}
 
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
 		Object[][] datos = new Object[testCases.size()][1];
 		for (int row = 0; row < testCases.size(); row++) {
 			datos[row][0] = testCases.get(row);
 		}
 		return datos;
+	}
+	
+	private void initWebDriver() {
+		if (choosedDriver.equals("chrome")) {
+			driver = new ChromeDriver();
+		} else {
+			driver = new FirefoxDriver();
+		}
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
 	}
 
 	// test de data provider
@@ -98,6 +109,7 @@ public class RunnerSelenium {
 	public void testCase(List<StepSelenium> pasos) throws IOException {
 		ReadObject object = new ReadObject();
 		Properties allObjects = object.getProperties();
+		initWebDriver();
 		SMethods fw = new SMethods(driver);
 		StepSelenium paso1 = pasos.get(0);
 		test = extent.createTest(paso1.getName(), paso1.getDescription());
@@ -118,14 +130,14 @@ public class RunnerSelenium {
 			} catch (Exception | AssertionError e) {
 				test.fail(getReportStepDescription(stepNo, step));
 				addDetails(test, step);
-				test.error(e.getMessage());
+				test.error(escapeHtml4(e.getMessage()));
 				TCFailed = true;
 			}
 			stepNo++;
 		}
-
+		driver.quit();
 	}
-
+	
 	@AfterSuite
 	public void tearDown() {
 		extent.flush();
@@ -138,7 +150,7 @@ public class RunnerSelenium {
 	}
 
 	private String getReportStepDescription(Integer stepNo, StepSelenium step) {
-		return String.format("step #%s: %s", stepNo.toString(), step.getStepDescription());
+		return escapeHtml4(String.format("step #%s: %s", stepNo.toString(), step.getStepDescription()));
 	}
 
 	public String captureScreen() {
@@ -163,9 +175,9 @@ public class RunnerSelenium {
 	}
 
 	private void addDetails(ExtentTest test, StepSelenium step) throws IOException {
-		String[][] tableData = { { "keyword", step.getKeyword() }, { "locator type", step.getLocatorType() },
-				{ "locator value", step.getLocatorValue() }
-				// ,{ "value", step.getValue() }
+		String[][] tableData = { { "keyword", escapeHtml4(step.getKeyword()) }, { "locator type", escapeHtml4(step.getLocatorType()) },
+				{ "locator value", escapeHtml4(step.getLocatorValue()) }
+				// ,{ "value", escapeHtml4(step.getValue()) }
 		};
 		Markup table = MarkupHelper.createTable(tableData);
 		test.log(Status.INFO, table);
