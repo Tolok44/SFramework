@@ -11,6 +11,7 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import excelManager.ReadExcelFile;
 import static org.apache.commons.text.StringEscapeUtils.escapeHtml4;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.OutputType;
 
@@ -68,8 +69,6 @@ public class RunnerSelenium {
 		extent = new ExtentReports();
 		extent.attachReporter(htmlReporter);
 
-		System.setProperty("webdriver.chrome.driver", ".\\Driver\\chromedriver.exe");
-		System.setProperty("webdriver.firefox.driver", ".\\Driver\\geckodriver.exe");
 	}
 
 	@DataProvider(name = "pasos")
@@ -95,9 +94,11 @@ public class RunnerSelenium {
 	}
 	
 	private void initWebDriver() {
-		if (choosedDriver.equals("chrome")) {
+		if (choosedDriver == "chrome"){
+			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
-		} else {
+		}else {
+			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 		}
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
