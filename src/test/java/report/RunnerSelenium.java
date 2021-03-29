@@ -79,7 +79,7 @@ public class RunnerSelenium {
 		path = info[0];
 		fileName = info[1];
 		tcSelected = info[2];
-//		choosedDriver = info[3]; // chrome or firefox
+		choosedDriver = info[3]; // chrome or firefox
 		String[] cases = tcSelected.split("-");
 		for (int i = 0; i < cases.length; i++) {
 			List<StepSelenium> steps = GetTCData.getStepSelenium(path, fileName, cases[i]);

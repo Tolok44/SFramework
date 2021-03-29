@@ -17,6 +17,7 @@ public class GUI   extends JFrame{
 	 JRadioButton[] radio ;
 	  String path = "";
       String fileName = "";
+      String driver="";
       
 	  public GUI() {
 		    super("Select Test Cases");
@@ -61,9 +62,9 @@ public class GUI   extends JFrame{
  
 		     
 		     JButton btnAll = new javax.swing.JButton();
-		     btnAll.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+		     btnAll.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		     btnAll.setForeground(new java.awt.Color(51, 51, 255));
-		     btnAll.setText("ALL");
+		     btnAll.setText("Select all TCs");
 		     btnAll.setFocusable(false);
 		     btnAll.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		     btnAll.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -73,9 +74,9 @@ public class GUI   extends JFrame{
 		            }
 		        });
 		     JButton btnClear = new javax.swing.JButton();
-		     btnClear.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+		     btnClear.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 		     btnClear.setForeground(new java.awt.Color(51, 51, 255));
-		     btnClear.setText("Clear");
+		     btnClear.setText("Clear Selection");
 		     btnClear.setFocusable(false);
 		     btnClear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		     btnClear.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -83,16 +84,40 @@ public class GUI   extends JFrame{
 		            public void actionPerformed(java.awt.event.ActionEvent evt) {
 		                btnClearActionPerformed(evt);
 		            }
-		        });	     
+		        });	  
+		     
+		     JToggleButton option1 = new JToggleButton("Chrome Driver");
+		     option1.addActionListener(new java.awt.event.ActionListener() {
+		            public void actionPerformed(java.awt.event.ActionEvent evt) {
+		                option1ActionPerformed(evt);
+		            }
+		        });	 
+		     JToggleButton option2 = new JToggleButton("FireFox Driver");
+		     option2.addActionListener(new java.awt.event.ActionListener() {
+		            public void actionPerformed(java.awt.event.ActionEvent evt) {
+		                option2ActionPerformed(evt);
+		            }
+		        });	 
+		     
+		 
+             option1.setSelected(true);
+             driver="chrome";
+             
+		     ButtonGroup group = new ButtonGroup();
+		     group.add(option1);
+		     group.add(option2); 
 
 		   JPanel p = new JPanel();
-		   JPanel p2 = new JPanel();
-
+		//   JPanel p2 = new JPanel(new BorderLayout(1,5));
+		  JPanel p2 = new JPanel();
 		    p.setSize(600, 400);
-		    p.setLayout(new GridLayout(13, 6, 10, 0));
+		    p.setLayout(new GridLayout(4, 4));
 		    
-		   p2.add(btnAll);
-		   p2.add(btnClear);
+			   p.add(btnAll);
+			   p.add(btnClear);
+			   p.add(option1);
+			   p.add(option2);
+		//   p2.add(btnClear);
 		   p2.add(p);
 		   
 	       String name = "";
@@ -121,25 +146,29 @@ public class GUI   extends JFrame{
 		  private void btnAllActionPerformed(java.awt.event.ActionEvent evt) {
 			 
 			  for (int t = 0; t < radio.length; t++) {
-
-		           radio[t].setSelected(true);
-		            
+		           radio[t].setSelected(true);		            
 		        }
 		  }
 		    
 		  private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {
 				 
 			  for (int t = 0; t < radio.length; t++) {
-
-		           radio[t].setSelected(false);
-		            
+		           radio[t].setSelected(false);		            
 		        }
 		  }	
-	  
+		  private void option1ActionPerformed(java.awt.event.ActionEvent evt) {
+				 
+			  driver="chrome";
+		  }	
+		  
+		  private void option2ActionPerformed(java.awt.event.ActionEvent evt) {
+				 
+			driver ="firefox";
+		  }
 
     public String[] showGui() throws IOException {
     	// String[] tcSelected;
-    	  String[] dataReturn = new String[3];
+    	  String[] dataReturn = new String[4];
         
         /** Show the Panel */
        JOptionPane.showMessageDialog(null, scrollpane);
@@ -158,7 +187,7 @@ public class GUI   extends JFrame{
         dataReturn[0] = path;
         dataReturn[1] = fileName;
         dataReturn[2] = radios;
-
+        dataReturn[3] = driver;
        return dataReturn;
 
     }
