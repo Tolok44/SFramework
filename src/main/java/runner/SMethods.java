@@ -19,6 +19,15 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.util.Properties;
 
+/*
+* This class contains all the methods used to run the front end tests of the RunnerSelenium class.
+* Including the actions and methods to use the locator types.
+*
+* Input: NA
+* Output:NA 
+* 
+* By: Team SDET Batch 1 
+*/
 
 
 public class SMethods {
