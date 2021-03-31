@@ -50,6 +50,16 @@ import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
+/*
+* This is an executable class to run front end tests, these can be selected 
+* per test case  or test sets.
+* 
+* Input: Excel data file
+* Output:HTML test report 
+* 
+* By: Team SDET Batch 1 	
+*/
+
 public class RunnerSelenium {
 
 	WebDriver driver;
@@ -105,7 +115,7 @@ public class RunnerSelenium {
 		driver.manage().window().maximize();
 	}
 
-	// test de data provider
+	
 	@Test(dataProvider = "pasos")
 	public void testCase(List<StepSelenium> pasos) throws IOException {
 		ReadObject object = new ReadObject();
@@ -178,7 +188,7 @@ public class RunnerSelenium {
 	private void addDetails(ExtentTest test, StepSelenium step) throws IOException {
 		String[][] tableData = { { "keyword", escapeHtml4(step.getKeyword()) }, { "locator type", escapeHtml4(step.getLocatorType()) },
 				{ "locator value", escapeHtml4(step.getLocatorValue()) }
-				// ,{ "value", escapeHtml4(step.getValue()) }
+				
 		};
 		Markup table = MarkupHelper.createTable(tableData);
 		test.log(Status.INFO, table);
